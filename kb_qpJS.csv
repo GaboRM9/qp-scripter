@@ -1,0 +1,21 @@
+Topic,URL
+Introduction,https://www.questionpro.com/custom-scripting/index.html
+Overview,https://www.questionpro.com/custom-scripting/velocity.html
+updateCustomN,https://www.questionpro.com/custom-scripting/velocity/update-custom-variable.html
+updateHighCustomVariable,https://www.questionpro.com/custom-scripting/velocity/update-high-custom-variable.html
+branchTo,https://www.questionpro.com/custom-scripting/velocity/branch-to.html
+Example Scripts,https://www.questionpro.com/custom-scripting/velocity/example-scripts.html
+Overview,https://www.questionpro.com/custom-scripting/javascript.html
+hideQuestion,https://www.questionpro.com/custom-scripting/javascript/hide-question.html
+showQuestion,https://www.questionpro.com/custom-scripting/javascript/show-question.html
+hideOption,https://www.questionpro.com/custom-scripting/javascript/hide-option.html
+showOption,https://www.questionpro.com/custom-scripting/javascript/show-option.html
+setOptionSelected,https://www.questionpro.com/custom-scripting/javascript/set-option-selected.html
+getSelectedOption,https://www.questionpro.com/custom-scripting/javascript/get-selected-option.html
+getSelectedOptions,https://www.questionpro.com/custom-scripting/javascript/get-selected-options.html
+getSelectedOptionIndex,https://www.questionpro.com/custom-scripting/javascript/get-selected-option-index.html
+getSelectedOptionsIndex,https://www.questionpro.com/custom-scripting/javascript/get-selected-options-index.html
+getSelectedCount,https://www.questionpro.com/custom-scripting/javascript/get-selected-count.html
+updateCustomVariable,https://www.questionpro.com/custom-scripting/javascript/update-custom-variable.html
+branchTo,https://www.questionpro.com/custom-scripting/javascript/branch-to.html
+Example Scripts,https://www.questionpro.com/custom-scripting/javascript/example-scripts.html
