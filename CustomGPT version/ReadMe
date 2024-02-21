@@ -1,0 +1,30 @@
+Internal - QuestionPro.
+
+Documented process to generate a custom GPT that helps the users generate scripts for JS logics.
+
+Step 1: Gather Data 
+
+
+geturls.py: Gets all the URLs present on a website and saves them on a CSV.
+getcontent.py: Gets all the text content of a csv of URLs.
+examples.js: This file contains a library of custom scripts.
+kb_qpscripting.txt: This file contains all the text content of all of the URLS extracted on geturls.py & getcontent.py
+
+Step 2: Clean & Clasify 
+
+Used python + regex to clean the data.
+
+doclean.py: Translates the code comments (Original in spanish)
+
+Step 3: Feed GPT
+
+There are 3 ways of doing this:
+
+1 - Directly uploading the files to a customGPT. (Currently active)
+2 - Create an assistant to have an API endpoint. (Not accurate)
+3 - Retrieval-Augmented Generation/Fine tune. 
+
+Intersting documentation:
+
+https://ollama.com/library/codellama
+https://python.langchain.com/docs/use_cases/code_understanding

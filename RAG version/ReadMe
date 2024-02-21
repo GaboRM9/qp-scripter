@@ -1,0 +1,32 @@
+QxScripter - RAG version
+
+QxScripter is a custom model specifically trained to support QuestionPro personal 
+when creating custom made scripts for JS logics.
+
+On this time we are going to use some of the following tools:
+
+1 - Python
+2 - Ollama Model: OllamaCode - Meta's open-source code interpreter model.
+3 - OpenAI or any Open - source emmbeding conversor.
+4 - Github repository containing knowledge files (data should be clean).
+5 - LangChain - Text spliting, data processing.
+6 - Vector DB and libraries for manipulation.
+
+*by clean I mean to standarize and format the data the best way possible before generate the emmbedings.
+
+The flow:
+
+Update clean data to a git repo.
+
+    We need to set a git hub repository to use as knowledge on the python script, this repository should only contain relevant files.
+
+Read and split documents using LangChain.
+
+    We will use LangChain to pre-process the data before the emmbedings.
+
+Create emmbedings and upload to db.
+
+RAG.
+Testing and Deployment.
+
+DOCUMENTATION - QxScripter - 
