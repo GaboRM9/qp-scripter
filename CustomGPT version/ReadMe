@@ -24,7 +24,3 @@ There are 3 ways of doing this:
 2 - Create an assistant to have an API endpoint. (Not accurate)
 3 - Retrieval-Augmented Generation/Fine tune. 
 
-Intersting documentation:
-
-https://ollama.com/library/codellama
-https://python.langchain.com/docs/use_cases/code_understanding
