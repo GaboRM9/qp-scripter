@@ -1,9 +1,9 @@
-QxScripter - RAG version
+QxScripter - CustomLLM version
 
 QxScripter is a custom model specifically trained to support QuestionPro personal 
 when creating custom made scripts for JS logics.
 
-On this time we are going to use some of the following tools:
+On this time we are going to use some of the following tools to create a customLLM for this purpose:
 
 1 - Python
 2 - Ollama Model: OllamaCode - Meta's open-source code interpreter model.
@@ -16,17 +16,24 @@ On this time we are going to use some of the following tools:
 
 The flow:
 
+I'll base the flow from the following documentation:
+
+https://ollama.com/library/codellama
+https://python.langchain.com/docs/use_cases/code_understanding
+
+Process:
+
 Update clean data to a git repo.
 
-    We need to set a git hub repository to use as knowledge on the python script, this repository should only contain relevant files.
+    We need to set a git hub repository/bucket to use as knowledge on the python script QxScripter.py, this repository should only contain relevant files.
 
 Read and split documents using LangChain.
 
     We will use LangChain to pre-process the data before the emmbedings.
 
-Create emmbedings and upload to db.
+Create emmbedings and upload to vector db.
 
 RAG.
+
 Testing and Deployment.
 
-DOCUMENTATION - QxScripter - 
