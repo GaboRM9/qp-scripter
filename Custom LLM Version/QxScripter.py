@@ -27,7 +27,7 @@ loader = GenericLoader.from_filesystem(
     glob="**/*",
     suffixes=[".js"],
     exclude=["**/non-utf8-encoding.js"],
-    parser=LanguageParser(language=Language.PYTHON, parser_threshold=500),
+    parser=LanguageParser(language=Language.js, parser_threshold=500),
 )
 documents = loader.load()
 len(documents)
