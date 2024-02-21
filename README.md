@@ -1,4 +1,4 @@
-On this repo you will find 2 folders with all the resources that im using to create a custom model that helps QuuestionPro users to make JS logics easier:
+On this repo you will find 2 folders with all the resources that im using to create a custom model that helps QuestionPro users to make JS logics easier:
 
 Custom LLM Version:
 
