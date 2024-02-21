@@ -35,7 +35,7 @@ len(documents)
 #Split the documents
 
 js_splitter = RecursiveCharacterTextSplitter.from_language(
-    language=Language.PYTHON, chunk_size=2000, chunk_overlap=200
+    language=Language.js, chunk_size=2000, chunk_overlap=200
 )
 texts = js_splitter.split_documents(documents)
 len(texts)
