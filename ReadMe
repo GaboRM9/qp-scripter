@@ -22,4 +22,4 @@ There are 3 ways of doing this:
 
 1 - Directly uploading the files to a customGPT. (Currently active)
 2 - Create an assistant to have an API endpoint. (Not accurate)
-3 - Retrieval-Augmented Generation.
+3 - Retrieval-Augmented Generation. (Still figuring out)
