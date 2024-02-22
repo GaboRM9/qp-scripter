@@ -12,11 +12,11 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain_openai import OpenAIEmbeddings
 import dotenv
 
-# Load environment variables
+# Load environment variables (for OpenAI Embeddings)
 dotenv.load_dotenv()
 
 # Knowledge files repo
-repo_path = "Custom LLM Version/repo" #Repo or bucket containing the files.
+repo_path = "Custom LLM Version/Knowledge" #Repo or bucket containing the files.
 
 #If you want to implement a github repo
 #repo = Repo.clone_from("https://github.com/GaboRM9/qp-js-knowledge", to_path=repo_path)
@@ -41,20 +41,20 @@ texts = js_splitter.split_documents(documents)
 
 print(texts)
 
-# Initialize the document retriever only if texts is not empty
+# Initialize the document retriever only if texts is not empty - Creation of vector db
 if texts:
     db = Chroma.from_documents(texts, OpenAIEmbeddings(disallowed_special=()))
     retriever = db.as_retriever(search_type="mmr", search_kwargs={"k": 8})
 else:
-    print("Empty repo or bucket, please upload files or verify JS extension.")
+    print("Empty texts, please upload files or verify JS extension.")
     # Handle the case where no texts are available as needed for your application
 
 # Initialize the LlamaCpp model
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 llm = LlamaCpp(
-    model_path="Custom LLM Version/model/codellama-7b.Q5_K_S.gguf",
-    n_ctx=5000,
-    n_gpu_layers=1,
+    model_path="Custom LLM Version/model/codellama-7b.Q5_K_S.gguf", #You can download this model here: https://huggingface.co/TheBloke/Llama-2-Coder-7B-GGUF
+    n_ctx=5000, #Context Window
+    n_gpu_layers=1, 
     n_batch=512,
     f16_kv=True,
     callback_manager=callback_manager,
@@ -82,4 +82,4 @@ if 'retriever' in locals():
     answer = chain({"input_documents": docs, "question": question}, return_only_outputs=True)
     print(answer)
 else:
-    print("Document retriever not initialized. Unable to process the question.")
+    print("Document retriever not initialized. Verify Knowledge repo access - Unable to process the question.")
