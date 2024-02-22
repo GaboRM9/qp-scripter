@@ -16,6 +16,11 @@ On this time we are going to use some of the following tools to create a customL
 
 The flow:
 
+Run this to instal the required dependencies:
+
+#Dependencies - pip install --upgrade --quiet  langchain-openai tiktoken chromadb langchain
+
+
 I'll base the flow from the following documentation:
 
 https://ollama.com/library/codellama

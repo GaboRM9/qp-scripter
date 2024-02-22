@@ -1,4 +1,3 @@
-#import dotenv
 from git import Repo
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
@@ -11,44 +10,49 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain.chains.question_answering import load_qa_chain
 from langchain_openai import OpenAIEmbeddings
-from langchain import hub
-from langchain.chains import LLMChain
-from langchain.memory import ConversationSummaryMemory
+import dotenv
 
 # Load environment variables
-#dotenv.load_dotenv()
+dotenv.load_dotenv()
 
 # Clone the repository
-repo_path = "Custom LLM Version/Knowledge"
-repo = Repo.clone_from("https://github.com/GaboRM9/qp-js-knowledge", to_path=repo_path)
+repo_path = "Custom LLM Version/repo" #Repo or bucket containing the files.
+
+#If you want to implement github
+#repo = Repo.clone_from("https://github.com/GaboRM9/qp-js-knowledge", to_path=repo_path)
 
 # Load documents
 loader = GenericLoader.from_filesystem(
-    repo_path + "/libs/langchain/langchain",
+    repo_path,
     glob="**/*",
     suffixes=[".js"],
     exclude=["**/non-utf8-encoding.js"],
-    parser=LanguageParser(language=Language.js, parser_threshold=500),
+    parser=LanguageParser(language=Language.JS, parser_threshold=500),
 )
 
 documents = loader.load()
 len(documents)
-print(documents) #test purposes
 
 # Split documents
 js_splitter = RecursiveCharacterTextSplitter.from_language(
-    language=Language.js, chunk_size=2000, chunk_overlap=200
+    language=Language.JS, chunk_size=2000, chunk_overlap=200
 )
 texts = js_splitter.split_documents(documents)
 
-# Initialize the document retriever
-db = Chroma.from_documents(texts, OpenAIEmbeddings(disallowed_special=()))
-retriever = db.as_retriever(search_type="mmr", search_kwargs={"k": 8})
+print(texts)
+
+# Initialize the document retriever only if texts is not empty
+if texts:
+    db = Chroma.from_documents(texts, OpenAIEmbeddings(disallowed_special=()))
+    retriever = db.as_retriever(search_type="mmr", search_kwargs={"k": 8})
+else:
+    print("Empty repo or bucket, please upload files or verify JS extension.")
+    # Handle the case where no texts are available as needed for your application
 
 # Initialize the LlamaCpp model
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 llm = LlamaCpp(
-    model_path="path/to/your/model",
+    model_path="Custom LLM Version/model/codellama-7b.Q5_K_S.gguf",
     n_ctx=5000,
     n_gpu_layers=1,
     n_batch=512,
@@ -58,17 +62,25 @@ llm = LlamaCpp(
 )
 
 # Define the prompt template
-template = """..."""  # Define your prompt template here
+template = """
+You are QxScripter, a bot desinged to help QuestionPro employees to develope JS scripts to use on their survey logic.
+You must base your responses usinng the available context:{context}, and you will answer the question:{question} exclusively based on the documentation 
+and code given on context, dont invent code or functions, use ONLY the available functions on context to make examples.
+Keep your responses short and prioritize giving the code example over explaining it.
+
+Helpful answer:"""  # Define your prompt template here
 QA_CHAIN_PROMPT = PromptTemplate(input_variables=["context", "question"], template=template)
 
 # Initialize the QA chain
-chain = load_qa_chain(llm, chain_type="your_chain_type", prompt=QA_CHAIN_PROMPT)
+chain = load_qa_chain(llm, chain_type="stuff", prompt=QA_CHAIN_PROMPT)
 
-# Retrieve documents for a question
-question = "Your question here"
-docs = retriever.get_relevant_documents(question)
+# Retrieve documents for a question only if the retriever is initialized
+if 'retriever' in locals():
+    question = "How can I hide an specific question of a survey using js?"
+    docs = retriever.get_relevant_documents(question)
 
-# Run the QA chain
-answer = chain({"input_documents": docs, "question": question}, return_only_outputs=True)
-print(answer)
-
+    # Run the QA chain
+    answer = chain({"input_documents": docs, "question": question}, return_only_outputs=True)
+    print(answer)
+else:
+    print("Document retriever not initialized. Unable to process the question.")
