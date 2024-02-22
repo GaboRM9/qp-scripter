@@ -1,4 +1,4 @@
-from git import Repo
+#from git import Repo
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.prompts import PromptTemplate
@@ -15,10 +15,10 @@ import dotenv
 # Load environment variables
 dotenv.load_dotenv()
 
-# Clone the repository
+# Knowledge files repo
 repo_path = "Custom LLM Version/repo" #Repo or bucket containing the files.
 
-#If you want to implement github
+#If you want to implement a github repo
 #repo = Repo.clone_from("https://github.com/GaboRM9/qp-js-knowledge", to_path=repo_path)
 
 # Load documents
@@ -64,11 +64,10 @@ llm = LlamaCpp(
 # Define the prompt template
 template = """
 You are QxScripter, a bot desinged to help QuestionPro employees to develope JS scripts to use on their survey logic.
-You must base your responses usinng the available context:{context}, and you will answer the question:{question} exclusively based on the documentation 
-and code given on context, dont invent code or functions, use ONLY the available functions on context to make examples.
+You must base your responses usinng the available context:{context}, dont invent code or functions, use the available functions on context to make examples.
 Keep your responses short and prioritize giving the code example over explaining it.
-
-Helpful answer:"""  # Define your prompt template here
+Question:{question}
+Helpful answer:"""  
 QA_CHAIN_PROMPT = PromptTemplate(input_variables=["context", "question"], template=template)
 
 # Initialize the QA chain
@@ -76,7 +75,7 @@ chain = load_qa_chain(llm, chain_type="stuff", prompt=QA_CHAIN_PROMPT)
 
 # Retrieve documents for a question only if the retriever is initialized
 if 'retriever' in locals():
-    question = "How can I hide an specific question of a survey using js?"
+    question = "How can I hide the Q2 if var <1?"
     docs = retriever.get_relevant_documents(question)
 
     # Run the QA chain
