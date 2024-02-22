@@ -3,42 +3,59 @@ QxScripter - CustomLLM version
 QxScripter is a custom model specifically trained to support QuestionPro personal 
 when creating custom made scripts for JS logics.
 
-On this time we are going to use some of the following tools to create a customLLM for this purpose:
+Getting Started
 
-1 - Python
-2 - Ollama Model: OllamaCode - Meta's open-source code interpreter model.
-3 - OpenAI or any Open - source emmbeding conversor.
-4 - Github repository containing knowledge files (data should be clean).
-5 - LangChain - Text spliting, data processing.
-6 - Vector DB and libraries for manipulation.
+On this time we are going to use the following tools to create a customLLM for this purpose:
 
-*by clean I mean to standarize and format the data the best way possible before generate the emmbedings.
+Prerequisites
+1 - Python 3.10+.
+2 - Ollama to run local models - https://ollama.com/.
+3 - Model: llamaCode - Meta's open-source code interpreter model. - #You can download this model here: https://huggingface.co/TheBloke/Llama-2-Coder-7B-GGUF, you can download >7b parameter models but if your computer has less than 8GB RAM expect crashes or a veeery slow performance. 
+4 - OpenAI or any Open source embeding conversor.
+5 - Repository containing knowledge files (data should be clean). *by clean I mean to standarize and format the data the best way possible before generate the emmbedings.
+6 - LangChain - Preprocessing and data transformation.
+7 - Vector DB - On langchain documentation they use Chroma, but if you need other one you could adapt the connector.
 
-The flow:
+Installation
+Start by installing the initial dependencies. Open your terminal and run the following command:
 
-Run this to instal the required dependencies:
+pip install --upgrade --quiet langchain-openai tiktoken chromadb langchain
 
-#Dependencies - pip install --upgrade --quiet  langchain-openai tiktoken chromadb langchain
+This command will install all the necessary libraries, including LangChain, OpenAI, TikToken, and ChromaDB, ensuring you have the latest versions.
 
+Running the Script
+After installing the dependencies and ensuring all files are correctly placed, you can run the QxScripter.py script. This script is the heart of our project and leverages the functionalities provided by the installed libraries.
 
-I'll base the flow from the following documentation:
+Workflow Overview
+The project workflow is based on the documentation provided at LangChain Code Understanding:
 
-https://ollama.com/library/codellama
 https://python.langchain.com/docs/use_cases/code_understanding
 
-Process:
+Here's a brief overview:
 
-Update clean data to a git repo.
+1. Update Data to Repository
+Objective: Maintain a dedicated GitHub repository (or a bucket) to store clean data that QxScripter.py will use.
+Requirements: The repository should only contain relevant files, properly named and with the correct extension based on the programming language in use.
+2. Document Pre-Processing
+Using LangChain: We employ LangChain to read, understand, and split documents, preparing them for further processing.
+3. Generate and Store Embeddings
+Embedding Generation: Utilize the OpenAI API to generate embeddings from the pre-processed data.
+Database Integration: ChromaDB will then create a database object to store these embeddings, facilitating efficient retrieval and analysis.
+4. Retrieval and Analysis (RAG)
+Retriever Functionality: The system retrieves relevant information from the database based on user queries, identifying similarities and patterns.
+5. Testing and Deployment
+Initial Testing: For initial tests, queries are hardcoded into the script. However, you can modify this to suit your testing needs.
 
-    We need to set a git hub repository/bucket to use as knowledge on the python script QxScripter.py, this repository should only contain relevant files.
+        # Retrieve documents for a question only if the retriever is initialized
+        if 'retriever' in locals():
+            question = "How can I hide the Q2 if var <1?" #Hard coded query
+            docs = retriever.get_relevant_documents(question)
 
-Read and split documents using LangChain.
 
-    We will use LangChain to pre-process the data before the emmbedings.
+Deployment: Successfully running the script to this stage indicates a local deployment of your custom LLM code interpreter. Congrats!
 
-Create emmbedings and upload to vector db.
+Next Steps
+While achieving local deployment is a significant milestone, our journey doesn't stop here. The current model requires fine-tuning to enhance its speed and consistency in providing answers. This fine-tuning process is crucial for improving the model's performance and utility.
 
-RAG.
-
-Testing and Deployment.
-
+Contribution
+Your contributions are invaluable to the growth and improvement of this project. Whether it's through suggesting new features, improving the code, or helping with model fine-tuning, every bit helps. Let's collaborate to make this tool more powerful and accessible to everyone.

@@ -52,7 +52,7 @@ else:
 # Initialize the LlamaCpp model
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 llm = LlamaCpp(
-    model_path="Custom LLM Version/model/codellama-7b.Q5_K_S.gguf", #You can download this model here: https://huggingface.co/TheBloke/Llama-2-Coder-7B-GGUF
+    model_path="Custom LLM Version/model/codellama-7b.Q5_K_S.gguf", 
     n_ctx=5000, #Context Window
     n_gpu_layers=1, 
     n_batch=512,
