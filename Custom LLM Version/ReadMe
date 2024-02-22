@@ -11,7 +11,7 @@ Prerequisites
 2 - Ollama to run local models - https://ollama.com/.
 3 - Model: llamaCode - Meta's open-source code interpreter model. - #You can download this model here: https://huggingface.co/TheBloke/Llama-2-Coder-7B-GGUF, you can download >7b parameter models but if your computer has less than 8GB RAM expect crashes or a veeery slow performance. 
 4 - OpenAI or any Open source embeding conversor.
-5 - Repository containing knowledge files (data should be clean). *by clean I mean to standarize and format the data the best way possible before generate the embeddings.
+5 - Repository containing knowledge files (Im using the Knowledge folder to store this files). *Its very important to standarize and format the data the best way possible before generate the embeddings.
 6 - LangChain - Preprocessing and data transformation.
 7 - Vector DB - On langchain documentation they use Chroma, but if you need other one you could adapt the connector.
 
