@@ -16,6 +16,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationSummaryMemory
 from langchain_openai import ChatOpenAI
 
+
 ##Clone
 repo_path = r"Custom LLM Version\Knowledge"
 repo = Repo.clone_from("https://github.com/GaboRM9/qp-js-knowledge", to_path=repo_path)
