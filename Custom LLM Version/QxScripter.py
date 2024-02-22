@@ -1,11 +1,11 @@
 #Dependencies - pip install --upgrade --quiet  langchain-openai tiktoken chromadb langchain
 
 # Set env var OPENAI_API_KEY or load from a .env file
-# import dotenv
+import dotenv
 
-# dotenv.load_dotenv()
+dotenv.load_dotenv()
 
-# from git import Repo
+from git import Repo
 from langchain.text_splitter import Language
 from langchain_community.document_loaders.generic import GenericLoader
 from langchain_community.document_loaders.parsers import LanguageParser
@@ -17,8 +17,8 @@ from langchain.memory import ConversationSummaryMemory
 from langchain_openai import ChatOpenAI
 
 ##Clone
-repo_path = "/Users/rlm/Desktop/test_repo"
-##repo = Repo.clone_from("https://github.com/langchain-ai/langchain", to_path=repo_path)
+repo_path = r"Custom LLM Version\Knowledge"
+repo = Repo.clone_from("https://github.com/GaboRM9/qp-js-knowledge", to_path=repo_path)
 
 ##Load
 
