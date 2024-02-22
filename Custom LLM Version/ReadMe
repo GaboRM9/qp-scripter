@@ -2,7 +2,7 @@ QxScripter - CustomLLM version
 
 QxScripter is a custom model specifically trained to support QuestionPro when creating custom made scripts for JS logics.
 
-Getting Started
+Getting Started:
 
 On this time we are going to use the following tools to create a customLLM for this purpose:
 
@@ -15,18 +15,19 @@ Prerequisites
 6 - LangChain - Preprocessing and data transformation.
 7 - Vector DB - On langchain documentation they use Chroma, but if you need other one you could adapt the connector.
 
-Installation
-Start by installing the initial dependencies. Open your terminal and run the following command:
+Installation:
+
+Clone this repo and create a folder called "model" inside the main folder (Custom LLM Version) then place the downloaded model inside, this model should be accesible from relative path here:
+
+        model_path="Custom LLM Version/model/codellama-7b.Q5_K_S.gguf" 
+
+        By default we are going to ignore this folder when doing pushs/PR. This until we have somewhere to host the model we want.
+
+Install the initial dependencies. Open your terminal and run the following command:
 
         pip install --upgrade --quiet langchain-openai tiktoken chromadb langchain
 
 This command will install all the necessary libraries, including LangChain, OpenAI, TikToken, and ChromaDB, ensuring you have the latest versions.
-
-Clone this repo and create a folder called "model" inside the main folder then place the downloaded model inside, this model should be accesible from relative path here:
-
-        model_path="Custom LLM Version/model/codellama-7b.Q5_K_S.gguf" 
-
-        By default we are going to ignore this folder when doing pushs/PR.
 
 Running the Script
 After installing the dependencies and ensuring all files are correctly placed, you can run the QxScripter.py script. This script is the heart of our project and leverages the functionalities provided by the installed libraries.
