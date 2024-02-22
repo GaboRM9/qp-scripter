@@ -31,7 +31,8 @@ loader = GenericLoader.from_filesystem(
     parser=LanguageParser(language=Language.js, parser_threshold=500),
 )
 documents = loader.load()
-print(documents)
+len(documents)
+print(documents) #test purposes
 # Split documents
 js_splitter = RecursiveCharacterTextSplitter.from_language(
     language=Language.js, chunk_size=2000, chunk_overlap=200
