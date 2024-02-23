@@ -61,6 +61,7 @@ llm = LlamaCpp(
     verbose=True,
 )
 
+
 # Define the prompt template
 template = """
 You are QxScripter, a bot desinged to help QuestionPro employees to develope JS scripts to use on their survey logic.
