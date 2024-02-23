@@ -25,7 +25,16 @@ Clone this repo and create a folder called "model" inside the main folder (Custo
 
 Install the initial dependencies. Open your terminal and run the following command:
 
-        pip install --upgrade --quiet langchain-openai tiktoken chromadb langchain
+        pip3 install --upgrade --quiet langchain-openai tiktoken chromadb langchain
+
+        pip3 install llama-cpp-python #if needed
+
+        If you experience any bottle neck try runing a previous version of llama-cpp-python:
+
+        pip3 uninstall llama-cpp-python
+        CMAKE_ARGS="-DLLAMA_METAL=on" pip install llama-cpp-python==0.2.27
+
+        This will get faster responses in exchange of RAM.
 
 This command will install all the necessary libraries, including LangChain, OpenAI, TikToken, and ChromaDB, ensuring you have the latest versions.
 
@@ -48,7 +57,16 @@ Using LangChain: We employ LangChain to read, understand, and split documents, p
 Embedding Generation: Utilize the OpenAI API to generate embeddings from the pre-processed data.
 Database Integration: ChromaDB will then create a database object to store these embeddings, facilitating efficient retrieval and analysis.
 4. Retrieval and Analysis (RAG)
+
+Before the query we need to format the prompt, example script for llama code
+
+def prompt_format():
+    SYSTEM_PROMPT = B_SYS + system_prompt + E_SYS
+    prompt_template = B_INST + SYSTEM_PROMPT + instruction + E_INST
+    return prompt_template
+
 Retriever Functionality: The system retrieves relevant information from the database based on user queries, identifying similarities and patterns.
+
 5. Testing and Deployment
 Initial Testing: For initial tests, queries are hardcoded into the script. However, you can modify this to suit your testing needs.
 

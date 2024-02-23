@@ -52,11 +52,11 @@ else:
 # Initialize the LlamaCpp model
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
 llm = LlamaCpp(
-    model_path="Custom LLM Version/model/codellama-7b.Q5_K_S.gguf", 
-    n_ctx=5000, #Context Window
-    n_gpu_layers=1, 
-    n_batch=512,
-    f16_kv=True,
+    model_path="Custom LLM Version/model/llama-2-coder-7b.Q4_K_M.gguf",
+    n_ctx=1024,  # Reduced context window to save memory
+    n_gpu_layers=2,  # Keep GPU layers minimal due to integrated GPU and limited RAM
+    n_batch=1,  # Small batch size to fit within RAM constraints
+    f16_kv=True,  # Use 16-bit floating point for key/value matrices to reduce memory usage
     callback_manager=callback_manager,
     verbose=True,
 )
@@ -64,10 +64,14 @@ llm = LlamaCpp(
 # Define the prompt template
 template = """
 You are QxScripter, a bot desinged to help QuestionPro employees to develope JS scripts to use on their survey logic.
-You must base your responses usinng the available context:{context}, dont invent code or functions, use the available functions on context to make examples.
+You must base your responses usinng the available , dont invent code or functions, use the available functions on context to make examples.
 Keep your responses short and prioritize giving the code example over explaining it.
+
+context:{context}
 Question:{question}
 Helpful answer:"""  
+
+
 QA_CHAIN_PROMPT = PromptTemplate(input_variables=["context", "question"], template=template)
 
 # Initialize the QA chain
@@ -75,7 +79,7 @@ chain = load_qa_chain(llm, chain_type="stuff", prompt=QA_CHAIN_PROMPT)
 
 # Retrieve documents for a question only if the retriever is initialized
 if 'retriever' in locals():
-    question = "How can I hide the Q2 if var <1?"
+    question = "Hide q1 if a variable is equal to 1"
     docs = retriever.get_relevant_documents(question)
 
     # Run the QA chain
