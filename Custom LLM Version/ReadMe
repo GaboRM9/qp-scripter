@@ -59,11 +59,18 @@ Database Integration: ChromaDB will then create a database object to store these
 4. Retrieval and Analysis (RAG)
 
 Before the query we need to format the prompt, example script for llama code
-
-def prompt_format():
-    SYSTEM_PROMPT = B_SYS + system_prompt + E_SYS
-    prompt_template = B_INST + SYSTEM_PROMPT + instruction + E_INST
-    return prompt_template
+        
+        # LLAMA PROMPT TEMPLATE
+       
+        B_INST, E_INST = "[INST]", "[/INST]"
+        B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
+        
+        SPECIAL_TAGS = [B_INST, E_INST, "<<SYS>>", "<</SYS>>"]
+        
+        def prompt_format():
+            SYSTEM_PROMPT = B_SYS + system_prompt + E_SYS
+            prompt_template = B_INST + SYSTEM_PROMPT + instruction + E_INST
+            return prompt_template
 
 Retriever Functionality: The system retrieves relevant information from the database based on user queries, identifying similarities and patterns.
 
